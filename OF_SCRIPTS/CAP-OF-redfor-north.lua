@@ -11,13 +11,14 @@
 -- 1. Observe the Su-27 patrolling.
 -- 
 
+-- Spawn_Plane = SPAWN:New("RedForCapNorth"):InitLimit( 2, 0 )
 Spawn_Plane = SPAWN:New("RedForCapNorth"):InitLimit( 2, 0 )
-
--- Repeat on ... (when landed on the airport)
 Spawn_Plane:InitRepeat()
+-- Repeat on ... (when landed on the airport)
+Spawn_Plane:SpawnAtAirbase( AIRBASE:FindByName( AIRBASE.Syria.Aleppo ), SPAWN.Takeoff.Cold )
 
 -- Now SPAWN the GROUPs every 5 minutes
-Spawn_Plane:SpawnScheduled(300,0)
+Spawn_Plane:SpawnScheduled(600,0)
 
 local CapPlane = GROUP:FindByName( "RedForCapNorth" )
 
