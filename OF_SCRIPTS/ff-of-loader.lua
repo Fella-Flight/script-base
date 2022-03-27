@@ -1,13 +1,13 @@
 -- Mist
 -- We're going to try this moose only baby
--- dofile(lfs.writedir()..[[Scripts\FellaFlight\mist_4_5_98.lua]])
+dofile(lfs.writedir()..[[Scripts\FellaFlight\mist_4_5_98.lua]])
 
 -- Moose 
 dofile(lfs.writedir()..[[Scripts\FellaFlight\Moose.lua]])
 
 -- CTLD for troops
--- supposed to be baked into DCMS
--- dofile(lfs.writedir()..[[Scripts\FellaFlight\MAW_SCRIPTS\CTLD.lua]])
+-- supposed to be baked into DCMS (but it got yeeted out of the codebase)
+dofile(lfs.writedir()..[[Scripts\FellaFlight\CTLD\CTLD.lua]])
 
 -- load utils
 dofile(lfs.writedir()..[[Scripts\FellaFlight\utils.lua]])
@@ -19,6 +19,12 @@ dofile(lfs.writedir()..[[Scripts\FellaFlight\FellaFlight.lua]])
 dofile(lfs.writedir()..[[Scripts\FellaFlight\OF_SCRIPTS\RecoveryTanker-OF.lua]])
 dofile(lfs.writedir()..[[Scripts\FellaFlight\OF_SCRIPTS\RecoveryTanker-OF-awacs.lua]])
 
+
+--Load North Syria CAp
+dofile(lfs.writedir()..[[Scripts\FellaFlight\OF_SCRIPTS\CAP-OF-redfor-north.lua]])
+
+-- IADS
+dofile(lfs.writedir()..[[Scripts\FellaFlight\IADS.lua]])
 
 
 

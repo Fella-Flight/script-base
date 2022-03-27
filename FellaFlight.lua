@@ -6,7 +6,7 @@ local jsonlib = lfs.writedir() .. [[Scripts\FellaFlight\json.lua]]
 json = loadfile(jsonlib)()
 
 -- Setup logging
-logFile = io.open(lfs.writedir() .. [[Logs\FellaFlight-MAW.log]], "w")
+logFile = io.open(lfs.writedir() .. [[Logs\FellaFlightlog]], "w")
 --JSON = (loadfile "JSON.lua")()
 
 _stats_add = function(statobj, objtype, val)
