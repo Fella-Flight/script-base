@@ -8,15 +8,16 @@
 -- ************************************************************************
 env.info("DSMC: Attempting to start DSMC_CTLD!")
 
-if ctld then
-    env.info("DSMC: ctld_c: another ctld version is running. halting process")
-    return
-end
+-- At the end of the day i don't really give a fuck, i just want this to run. Checkmate!
+-- if ctld then
+--     env.info("DSMC: ctld_c: another ctld version is running. halting process")
+--     return
+-- end
 
-if not DSMC_MainVersion then
-    env.info("DSMC ctld_c: DSMC is required to allow this code to be run correctly")
-    return
-end
+-- if not DSMC_MainVersion then
+--     env.info("DSMC ctld_c: DSMC is required to allow this code to be run correctly")
+--     return
+-- end
 
 ctld_c = {} 
 
