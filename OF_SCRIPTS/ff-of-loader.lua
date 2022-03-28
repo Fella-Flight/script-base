@@ -39,7 +39,7 @@ dofile(lfs.writedir()..[[Scripts\FellaFlight\OF_SCRIPTS\CAP-OF-redfor-north.lua]
 -- IADS
 dofile(lfs.writedir()..[[Scripts\FellaFlight\IADS.lua]])
 
-
+--dofile(lfs.writedir()..[[Scripts\FellaFlight\load_pgaw.lua]])
 
 -- export all our stuff to save out
 -- TBD get working later

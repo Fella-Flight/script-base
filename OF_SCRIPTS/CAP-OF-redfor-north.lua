@@ -9,7 +9,7 @@ AG_CAP_Templates = {
 
 -- Spawn_Plane = SPAWN:New("RedForCapNorth"):InitLimit( 2, 0 )
 Spawn_Plane = SPAWN:New("RedForCapNorth")
-Spawn_Plane:InitLimit(20, 0)
+Spawn_Plane:InitLimit(2, 0)
 Spawn_Plane:InitRepeat()
 Spawn_Plane:InitRandomizeTemplate(AG_CAP_Templates)
 -- Repeat on ... (when landed on the airport)

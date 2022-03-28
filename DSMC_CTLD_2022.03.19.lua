@@ -35351,6 +35351,8 @@ if ctld_c.ctryList then
         end
     end
     --ctryList = nil
+else
+    env.info("DSMC ctld_c.ctryList NOT found")
 end
 
 ctld_c.tblObjectshapeNames = {
@@ -36223,12 +36225,15 @@ ctld_c.longRangeSAMsystem = {
 
 if ctld_c.longRangeSamCrates == true then
     for sysName, sysData in pairs(ctld_c.longRangeSAMsystem) do
+        env.info(("DSMC: pre-checking SAM system " .. tostring(sysName) .. tostring(sysData) ))    
         ctld_c.samSystems[sysName] = sysData
-        --table.insert(ctld_c.samSystems, crateData)
+        -- going to uncomment this to see if it's the issue?
+        table.insert(ctld_c.samSystems, crateData)
     end
 end
 
 -- populate sam table
+env.info(("DSMC: pre-checking SAM system " .. tostring(sysName)))
 if ctld_c.ctryList and #ctld_c.ctryList > 0 then
     local missionYear = tonumber(env.mission.date.Year)
 
