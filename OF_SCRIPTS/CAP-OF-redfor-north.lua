@@ -1,19 +1,17 @@
--- Name: CAP-001 - Combat Air Patrol
--- Author: FlightControl
--- Date Created: 16 January 2017
---
--- # Situation:
--- The Su-27 airplane will patrol in PatrolZone.
--- It will not engage any enemy automatically.
--- 
--- # Test cases:
--- 
--- 1. Observe the Su-27 patrolling.
--- 
+AG_CAP_Templates = {
+    "RedFor CAP Mig29",
+    "RedFor CAP Mig 23",
+    "RedFor CAP Su 27",
+    "RedFor CAP Su 30",
+    "RedFor CAP Su 33",
+}
+
 
 -- Spawn_Plane = SPAWN:New("RedForCapNorth"):InitLimit( 2, 0 )
-Spawn_Plane = SPAWN:New("RedForCapNorth"):InitLimit( 2, 0 )
+Spawn_Plane = SPAWN:New("RedForCapNorth")
+Spawn_Plane:InitLimit(20, 0)
 Spawn_Plane:InitRepeat()
+Spawn_Plane:InitRandomizeTemplate(AG_CAP_Templates)
 -- Repeat on ... (when landed on the airport)
 Spawn_Plane:SpawnAtAirbase( AIRBASE:FindByName( AIRBASE.Syria.Aleppo ), SPAWN.Takeoff.Cold )
 
