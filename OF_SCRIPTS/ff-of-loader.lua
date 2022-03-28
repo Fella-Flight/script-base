@@ -10,7 +10,7 @@ dofile(lfs.writedir()..[[Scripts\FellaFlight\Moose.lua]])
 -- dofile(lfs.writedir()..[[Scripts\FellaFlight\CTLD\CTLD.lua]])
 
 -- DSMC version of CTLD
-dofile(lfs.writedir()..[[Scripts\FellaFlight\DSMC_CTLD_2022.03.19.lua]])
+-- dofile(lfs.writedir()..[[Scripts\FellaFlight\DSMC_CTLD_2022.03.19.lua]])
 
 
 -- load utils

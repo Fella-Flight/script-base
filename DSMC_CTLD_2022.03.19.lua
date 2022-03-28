@@ -6,6 +6,7 @@
 -- ************************************************************************
 -- *********************  DO NOT TOUCH HERE *******************************
 -- ************************************************************************
+env.info("DSMC: Attempting to start DSMC_CTLD!")
 
 if ctld then
     env.info("DSMC: ctld_c: another ctld version is running. halting process")
