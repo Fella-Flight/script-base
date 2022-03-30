@@ -16,7 +16,8 @@ AG_Ground_Attack_templates = {
 }
 
 
-
+-- env.info("FLAG ".._flagNumber.." crates ".._crateCount)
+env.info("RedFor-MBT-North spawning...")
 local random_Attack_template = AG_Ground_Attack_templates[ math.random( #AG_Ground_Attack_templates ) ] 
 
 AG_Ground_001_Spawn = SPAWN:New(random_Attack_template)
@@ -27,6 +28,7 @@ AG_Ground_001_Spawn:InitRandomizeTemplate(AG_Ground_Templates)
 -- AG_Ground_001_Spawn:InitRandomizeRoute(7, 0, 8000)
 
 -- Spreadem
-AG_Ground_001_Spawn:InitArray(330, 2, 50, 10)
-
-AG_Ground_001_Spawn:SpawnScheduled(1800,0)
+-- AG_Ground_001_Spawn:InitArray(330, 2, 50, 10)
+-- AG_Ground_001_Spawn:SpawnScheduled(10,0)
+AG_Ground_001_Spawn:Spawn()
+env.info("RedFor-MBT-North spawning...completed")
