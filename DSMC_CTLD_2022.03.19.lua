@@ -6,18 +6,18 @@
 -- ************************************************************************
 -- *********************  DO NOT TOUCH HERE *******************************
 -- ************************************************************************
-env.info("DSMC: Attempting to start DSMC_CTLD!")
 
--- At the end of the day i don't really give a fuck, i just want this to run. Checkmate!
--- if ctld then
---     env.info("DSMC: ctld_c: another ctld version is running. halting process")
---     return
--- end
+if ctld then
+    env.info("DSMC: ctld_c: another ctld version is running. halting process")
+    return
+end
 
--- if not DSMC_MainVersion then
---     env.info("DSMC ctld_c: DSMC is required to allow this code to be run correctly")
---     return
--- end
+if not DSMC_MainVersion then
+    env.info("DSMC ctld_c: DSMC is required to allow this code to be run correctly")
+    return
+end
+
+env.info("DSMC's CTLD: loading code... ")
 
 ctld_c = {} 
 
@@ -670,12 +670,6 @@ ctld_c.deliverableCrates = {
 
 
 
-
-
-
-
-
-
 -- ************************************************************************
 -- ************************************************************************
 -- ************************************************************************
@@ -686,7 +680,7 @@ ctld_c.deliverableCrates = {
 
 ctld_c.datespan               = 30 -- number of years that DSMC goes back to identify available units, using DCS database
 ctld_c.f10menuUpdateFreq      = 1 -- time in seconds between an F10 menù update and the subsequent one
-ctld_c.factoryok              = {}
+--  ctld_c.factoryok              = {}
 ctld_c.ctryList               = ctryList or nil -- this is dependant on DSMC. no DSMC available will create issues.
 ctld_c.soldierModelRed        = "Infantry AK"
 ctld_c.soldierModelBlue       = "Soldier M4 GRG"
@@ -35351,8 +35345,6 @@ if ctld_c.ctryList then
         end
     end
     --ctryList = nil
-else
-    env.info("DSMC ctld_c.ctryList NOT found")
 end
 
 ctld_c.tblObjectshapeNames = {
@@ -36225,15 +36217,12 @@ ctld_c.longRangeSAMsystem = {
 
 if ctld_c.longRangeSamCrates == true then
     for sysName, sysData in pairs(ctld_c.longRangeSAMsystem) do
-        env.info(("DSMC: pre-checking SAM system " .. tostring(sysName) .. tostring(sysData) ))    
         ctld_c.samSystems[sysName] = sysData
-        -- going to uncomment this to see if it's the issue?
-        table.insert(ctld_c.samSystems, crateData)
+        --table.insert(ctld_c.samSystems, crateData)
     end
 end
 
 -- populate sam table
-env.info(("DSMC: pre-checking SAM system " .. tostring(sysName)))
 if ctld_c.ctryList and #ctld_c.ctryList > 0 then
     local missionYear = tonumber(env.mission.date.Year)
 
@@ -37811,6 +37800,7 @@ function ctld_c.msgNearestFuelDeposit(vars) -- added for
     end
 end
 
+--[[
 function ctld_c.msgNearestFactory(vars)
     local _heliName = vars[1]
     local _heli = Unit.getByName(_heliName)
@@ -37869,6 +37859,7 @@ function ctld_c.msgNearestFactory(vars)
         return false
     end
 end
+--]]--
 
 function ctld_c.spawnCrate(_arguments)
     local _status, _err = pcall(function(_args)
@@ -37886,14 +37877,11 @@ function ctld_c.spawnCrate(_arguments)
             
             if _crateType.obj_crate == "fueltank_cargo" then
             
-                local ex1, msg1 = ctld_c.inFactoryZone(_heli)
+                --local ex1, msg1 = ctld_c.inFactoryZone(_heli)
                 local ex2, msg2 = ctld_c.inFuelDepositZone(_heli)
-                if ex1 == false and ex2 == false then
+                if ex2 == false then
                 
-                    ctld_c.displayMessageToGroup(_heli, "Airlift fuel crates can be requested only in proximity to a production site or a fuel depot\n", ctld_c.displayMessageTime)
-                    if msg1 then
-                        ctld_c.displayMessageToGroup(_heli, "Nearest production site is at " .. tostring(msg1), ctld_c.displayMessageTime*2)
-                    end            
+                    ctld_c.displayMessageToGroup(_heli, "Airlift fuel crates can be requested only in proximity to fuel depot\n", ctld_c.displayMessageTime)           
                     if msg2 then
                         ctld_c.displayMessageToGroup(_heli, "Nearest fuel depot is at " .. tostring(msg2), ctld_c.displayMessageTime)
                     end 
@@ -37902,14 +37890,11 @@ function ctld_c.spawnCrate(_arguments)
 
             elseif _crateType.obj_crate == "ammo_cargo" then
         
-                local ex1, msg1 = ctld_c.inFactoryZone(_heli)
+                --local ex1, msg1 = ctld_c.inFactoryZone(_heli)
                 local ex2, msg2 = ctld_c.inAmmoDepositZone(_heli)
-                if ex1 == false and ex2 == false then
+                if ex2 == false then
                 
-                    ctld_c.displayMessageToGroup(_heli, "Airlift ammo crates can be requested only in proximity to a production site or a ammo depot\n", ctld_c.displayMessageTime)
-                    if msg1 then
-                        ctld_c.displayMessageToGroup(_heli, "Nearest production site is at " .. tostring(msg1), ctld_c.displayMessageTime*2)
-                    end            
+                    ctld_c.displayMessageToGroup(_heli, "Airlift ammo crates can be requested only in proximity to an ammo depot\n", ctld_c.displayMessageTime)          
                     if msg2 then
                         ctld_c.displayMessageToGroup(_heli, "Nearest ammo depot is at " .. tostring(msg2), ctld_c.displayMessageTime)
                     end
@@ -37918,6 +37903,12 @@ function ctld_c.spawnCrate(_arguments)
                 
 
             elseif _crateType.factory then
+				
+				if debugProcessDetail then
+					env.info("DSMC there's something strange here, no factory crates should exist")
+				end		
+				
+				--[[
                 if ctld_c.inFactoryZone(_heli) == false then
 
                     local ex, msg = ctld_c.inFactoryZone(_heli)
@@ -37929,11 +37920,12 @@ function ctld_c.spawnCrate(_arguments)
                     end
                     return
                 end
+				--]]--
             else
                 if ctld_c.inLogisticsZone(_heli) == false then
                     local ex, msg = ctld_c.inLogisticsZone(_heli)
 
-                    ctld_c.displayMessageToGroup(_heli, "You need to be close enough to a logistic site to request constructable crate", ctld_c.displayMessageTime)
+                    ctld_c.displayMessageToGroup(_heli, "You need to be close enough to a logistic site to request crate", ctld_c.displayMessageTime)
                     if msg then
                         ctld_c.displayMessageToGroup(_heli, "Nearest logistic site is at " .. tostring(msg), ctld_c.displayMessageTime*2)
                     end
@@ -42002,7 +41994,7 @@ function ctld_c.addF10MenuOptions()
                             missionCommands.addCommandForGroup(_groupId, "Request nearest logistic site", _logicMenu, ctld_c.msgNearestLogistic, { _unitName })
 
                             if ctld_c.enableCrates then                                                            
-                                missionCommands.addCommandForGroup(_groupId, "Request nearest production site", _logicMenu, ctld_c.msgNearestFactory, { _unitName })
+                                --missionCommands.addCommandForGroup(_groupId, "Request nearest production site", _logicMenu, ctld_c.msgNearestFactory, { _unitName })
                                 missionCommands.addCommandForGroup(_groupId, "Request nearest fuel deposit", _logicMenu, ctld_c.msgNearestFuelDeposit, { _unitName })
                                 missionCommands.addCommandForGroup(_groupId, "Request nearest ammo deposit", _logicMenu, ctld_c.msgNearestAmmoDeposit, { _unitName })
                             end
@@ -43982,6 +43974,7 @@ function ctld_c.updatectld_cTables()
                                                                                     end
                                                                                 end
                                                                             end
+																			--[[
                                                                         elseif _unit.type == "Workshop A" then 
                                                                             env.info("DSMC updatectld_cTables: checking Factories, found Workshop A object:" .. tostring(unitName))	
                                                                             local stObject = StaticObject.getByName(unitName)
@@ -43998,6 +43991,7 @@ function ctld_c.updatectld_cTables()
                                                                                 --ctld_c.factoryok = true
                                                                                 env.info("DSMC updatectld_cTables: factoryok " .. tostring(ctld_c.factoryok))	
                                                                             end
+																			--]]--
 
                                                                         end
                                                                     --end
@@ -44199,4 +44193,4 @@ for _coalitionName, _coalitionData in pairs(env.mission.coalition) do
 end
 env.info("END search for crates")
 
-env.info("ctld_c READY")
+env.info("DSMC's CTLD READY")
