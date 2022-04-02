@@ -1,6 +1,10 @@
+-- Setup JSON library to be able to parse json
+local jsonlib = lfs.writedir() .. [[Scripts\FellaFlight\json.lua]]
+json = loadfile(jsonlib)()
+
 -- Mist
 -- We're going to try this moose only baby
--- dofile(lfs.writedir()..[[Scripts\FellaFlight\mist_4_5_98.lua]])
+dofile(lfs.writedir()..[[Scripts\FellaFlight\mist_4_5_98.lua]])
 
 -- Moose 
 dofile(lfs.writedir()..[[Scripts\FellaFlight\Moose.lua]])
@@ -38,6 +42,10 @@ dofile(lfs.writedir()..[[Scripts\FellaFlight\OF_SCRIPTS\CAP-OF-redfor-north.lua]
 
 -- IADS
 dofile(lfs.writedir()..[[Scripts\FellaFlight\IADS.lua]])
+
+-- Weapon_points
+dofile(lfs.writedir()..[[Scripts\FellaFlight\weapon_points\weapon_points.lua]])
+
 
 --dofile(lfs.writedir()..[[Scripts\FellaFlight\load_pgaw.lua]])
 
